@@ -44,3 +44,7 @@ func (pq *PQ[T]) Pop() any {
 func (pq *PQ[T]) Get() T {
 	return *heap.Pop(pq).(*T)
 }
+
+func (pq *PQ[T]) Peek() T {
+	return *pq.items[0]
+}
