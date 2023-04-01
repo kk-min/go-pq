@@ -3,14 +3,14 @@ package pq
 import "container/heap"
 
 type PQ[T comparable] struct {
-	items []T
+	items []*T
 	less  LessFunction[T]
 }
 
 type LessFunction[T comparable] func(T, T) bool
 
 func CreatePQ[T comparable](less LessFunction[T]) *PQ[T] {
-	return &PQ[T]{[]T{}, less}
+	return &PQ[T]{[]*T{}, less}
 }
 
 func (pq *PQ[T]) Len() int {
@@ -22,11 +22,15 @@ func (pq *PQ[T]) Swap(i, j int) {
 }
 
 func (pq *PQ[T]) Less(i, j int) bool {
-	return pq.less(pq.items[i], pq.items[j])
+	return pq.less(*pq.items[i], *pq.items[j])
 }
 
 func (pq *PQ[T]) Push(item any) {
-	heap.Push(pq, item)
+	pq.items = append(pq.items, item.(*T))
+}
+
+func (pq *PQ[T]) Put(item T) {
+	heap.Push(pq, &item)
 }
 
 func (pq *PQ[T]) Pop() any {
