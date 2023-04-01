@@ -1,5 +1,5 @@
 # Go Priority Queue 
-_Copyright © kk-min_
+_Copyright © 2023 kk-min_
 
 Generic priority queue implementation for Go.
 
