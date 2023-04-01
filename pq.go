@@ -40,3 +40,8 @@ func (pq *PQ[T]) Pop() any {
 	pq.items = old[0 : n-1]
 	return item
 }
+
+func (pq *PQ[T]) Get() T {
+	return *heap.Pop(pq).(*T)
+}
+}
