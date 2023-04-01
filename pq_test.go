@@ -12,7 +12,7 @@ type CustomItem struct {
 func TestPQCreationInt(t *testing.T) {
 	q := CreatePQ[int](func(a, b int) bool { return a < b })
 	if q == nil {
-		t.Error("PQ Creation failed")
+		t.Error("PQ CreationInt failed")
 	}
 }
 
@@ -57,14 +57,18 @@ func TestPQPeekInt(t *testing.T) {
 	q.Put(3)
 
 	if q.Peek() != 3 {
-		t.Error("PQ Peek failed")
+		t.Error("PQ PeekInt failed")
+	}
+
+	if len(q.Items) != 2 {
+		t.Error("PQ PeekInt failed")
 	}
 }
 
 func TestPQCreationCustom(t *testing.T) {
 	q := CreatePQ[CustomItem](func(a, b CustomItem) bool { return a.Val < b.Val })
 	if q == nil {
-		t.Error("PQ Creation failed")
+		t.Error("PQ CreationCustom failed")
 	}
 }
 
@@ -111,6 +115,10 @@ func TestPQPeekCustom(t *testing.T) {
 
 	head := q.Peek()
 	if head.Key != "c" || head.Val != 1 {
+		t.Error("PQ PeekCustom failed")
+	}
+
+	if len(q.Items) != 3 {
 		t.Error("PQ PeekCustom failed")
 	}
 }
