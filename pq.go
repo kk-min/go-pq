@@ -3,7 +3,7 @@ package pq
 import "container/heap"
 
 type PQ[T comparable] struct {
-	items []*T
+	Items []*T
 	less  LessFunction[T]
 }
 
@@ -14,19 +14,19 @@ func CreatePQ[T comparable](less LessFunction[T]) *PQ[T] {
 }
 
 func (pq *PQ[T]) Len() int {
-	return len(pq.items)
+	return len(pq.Items)
 }
 
 func (pq *PQ[T]) Swap(i, j int) {
-	pq.items[i], pq.items[j] = pq.items[j], pq.items[i]
+	pq.Items[i], pq.Items[j] = pq.Items[j], pq.Items[i]
 }
 
 func (pq *PQ[T]) Less(i, j int) bool {
-	return pq.less(*pq.items[i], *pq.items[j])
+	return pq.less(*pq.Items[i], *pq.Items[j])
 }
 
 func (pq *PQ[T]) Push(item any) {
-	pq.items = append(pq.items, item.(*T))
+	pq.Items = append(pq.Items, item.(*T))
 }
 
 func (pq *PQ[T]) Put(item T) {
@@ -34,10 +34,10 @@ func (pq *PQ[T]) Put(item T) {
 }
 
 func (pq *PQ[T]) Pop() any {
-	old := pq.items
+	old := pq.Items
 	n := len(old)
 	item := old[n-1]
-	pq.items = old[0 : n-1]
+	pq.Items = old[0 : n-1]
 	return item
 }
 
@@ -46,5 +46,5 @@ func (pq *PQ[T]) Get() T {
 }
 
 func (pq *PQ[T]) Peek() T {
-	return *pq.items[0]
+	return *pq.Items[0]
 }
