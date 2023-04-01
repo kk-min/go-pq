@@ -44,4 +44,3 @@ func (pq *PQ[T]) Pop() any {
 func (pq *PQ[T]) Get() T {
 	return *heap.Pop(pq).(*T)
 }
-}
